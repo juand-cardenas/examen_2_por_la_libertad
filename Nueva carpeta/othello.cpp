@@ -46,7 +46,6 @@ othello::othello(int tamaño)
 
 }
 
-
 void othello::imprimir_tablero(){
     for(int i=0;i<tamaño_tablero;i++){
         cout<<"----";
@@ -67,17 +66,15 @@ void othello::imprimir_tablero(){
 
 }
 
-
-
 void othello::imprimir_fut_pos_x(){
     cout<<"escriba la poscion en x donde quiere que quede su ficha: ";
 }
 
-void othello ::recibe_ficha_x(){
+void othello ::recibe_ficha_x(int posx){
     int x,tama_tab;
-    cin>>x;
+    x=posx;
     tama_tab=tamaño_tablero-2;
-    if(0<x<=tama_tab){pos_x=x; }
+    if(0<x and x<=tama_tab){pos_x=x;}
     else {imprimir_error_en_posicion();}
 }
 
@@ -85,15 +82,21 @@ void othello::imprimir_fut_pos_y(){
     cout<<"escriba la poscion en y donde quiere que quede su ficha: ";
 }
 
-void othello ::recibe_ficha_y(){
+void othello ::recibe_ficha_y(int posy){
     int y,tama_tab;
-    cin>>y;
+    y=posy;
     tama_tab=tamaño_tablero-2;
-    if(0<y<=tama_tab){pos_y=y; }
+    if(0<y and y<=tama_tab){pos_y=y; }
     else {imprimir_error_en_posicion();}
-    *(*(tablero+pos_x)+pos_y);
+
 }
 
 void othello::imprimir_error_en_posicion(){
     cout<<"la posicion ingresada no es valida.";
+}
+
+void othello:: actualizar_tablero(char ficha){
+    if(verificacion==true){
+        *(*(tablero+pos_x)+pos_y)=ficha;
+    }
 }
