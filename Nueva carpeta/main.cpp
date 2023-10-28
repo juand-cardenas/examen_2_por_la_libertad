@@ -5,17 +5,27 @@
 using namespace std;
 
 int main()
-{   int pos_x,pos_y;
+{   //int pos_x,pos_y;
     othello hola(8);
 
     hola.imprimir_tablero();
-    hola.imprimir_fut_pos_x();
-    cin>>pos_x;
-    hola.recibe_ficha_x(pos_x);
-    hola.imprimir_fut_pos_y();
-    cin>>pos_y;
-    hola.recibe_ficha_y(pos_y);
+
+    //hola.recibe_ficha_x(1);
+    //hola.recibe_ficha_y(4);
+    //hola. actualizar_tablero('*');
+    hola.recibe_ficha_x(2);
+    hola.recibe_ficha_y(5);
+    hola. actualizar_tablero('-');
+    hola.recibe_ficha_x(6);
+    hola.recibe_ficha_y(6);
+    hola. actualizar_tablero('-');
+    hola.recibe_ficha_x(7);
+    hola.recibe_ficha_y(7);
+    hola. actualizar_tablero('-');
+    hola.recibe_ficha_x(1);
+    hola.recibe_ficha_y(1);
     hola. actualizar_tablero('*');
+    hola.voltear_fichas('*','-');
     hola.imprimir_tablero();
 
 

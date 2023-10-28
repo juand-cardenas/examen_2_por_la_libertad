@@ -11,7 +11,7 @@ private:
     char** tablero;
     int tamaño_tablero;
     int pos_x,pos_y;
-    bool verificacion=false;
+    bool verificacion=true;
 
 public:
 
@@ -23,6 +23,7 @@ public:
     void recibe_ficha_y(int posy);
     void imprimir_error_en_posicion();
     void actualizar_tablero(char ficha);
+    void voltear_fichas(char ficha_alidad, char ficha_enemiga);
 
 };
 

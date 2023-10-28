@@ -47,6 +47,7 @@ othello::othello(int tamaño)
 }
 
 void othello::imprimir_tablero(){
+    //imprime el tablero
     for(int i=0;i<tamaño_tablero;i++){
         cout<<"----";
     }
@@ -67,10 +68,12 @@ void othello::imprimir_tablero(){
 }
 
 void othello::imprimir_fut_pos_x(){
+    //imprime un dialogo
     cout<<"escriba la poscion en x donde quiere que quede su ficha: ";
 }
 
 void othello ::recibe_ficha_x(int posx){
+    //esto recibe la posicion del tablero y comprueba que sea valida
     int x,tama_tab;
     x=posx;
     tama_tab=tamaño_tablero-2;
@@ -79,10 +82,12 @@ void othello ::recibe_ficha_x(int posx){
 }
 
 void othello::imprimir_fut_pos_y(){
+    //imprime un dialogo
     cout<<"escriba la poscion en y donde quiere que quede su ficha: ";
 }
 
 void othello ::recibe_ficha_y(int posy){
+    //esto recibe la posicion del tablero y comprueba que sea valida
     int y,tama_tab;
     y=posy;
     tama_tab=tamaño_tablero-2;
@@ -92,11 +97,120 @@ void othello ::recibe_ficha_y(int posy){
 }
 
 void othello::imprimir_error_en_posicion(){
+    //imprime un dialogo
     cout<<"la posicion ingresada no es valida.";
 }
 
 void othello:: actualizar_tablero(char ficha){
+    //esto pone la "ficha" en el tabalero, mientrans que la verificacion de la posicion sea verdaderoS
     if(verificacion==true){
         *(*(tablero+pos_x)+pos_y)=ficha;
     }
 }
+
+void othello :: voltear_fichas(char ficha_alidad, char ficha_enemiga){
+    int copy_x,copy_y,cont=0,diagonal;
+    char auxiliar;
+    copy_x=pos_x;
+    copy_y=pos_y;
+    for(int j=(copy_y-1);0<=j;j--){
+        auxiliar=*(*(tablero+pos_x)+j);
+        if(auxiliar==ficha_enemiga){
+            cont+=1;
+        }
+        else{
+            if(auxiliar==ficha_alidad){
+                j=0; cont+=1;
+            }
+            else{cont=0; j=0;}
+        }
+    }
+    if(cont>0){
+        for(int j=(copy_y-cont);j<copy_y;j++){
+            *(*(tablero+copy_x)+j)=ficha_alidad;
+        }
+    }
+    //lo anterior, comprueba el lado izquierdo de la ficha, de tal forma, si se puede voltear fichas para
+    //ese lado se hara, de lo contrario no se volteara las fichas
+    cont=0;
+    for(int j=(copy_y+1);j<=tamaño_tablero-1;j++){
+        auxiliar=*(*(tablero+pos_x)+j);
+        if(auxiliar==ficha_enemiga){
+            cont+=1;
+        }
+        else{
+            if(auxiliar==ficha_alidad){
+                j=tamaño_tablero; cont+=1;
+            }
+            else{cont=0; j=tamaño_tablero;}
+        }
+    }
+    if(cont>0){
+        for(int j=(copy_y+cont);j>copy_y;j--){
+            *(*(tablero+copy_x)+j)=ficha_alidad;
+        }
+    }
+    //lo anterior, comprueba el lado derecho de la ficha, de tal forma, si se puede voltear fichas para
+    //ese lado se hara, de lo contrario no se volteara las fichas
+    cont=0;
+    for(int j=(copy_x-1);0<=j;j--){
+        auxiliar=*(*(tablero+j)+pos_y);
+        if(auxiliar==ficha_enemiga){
+            cont+=1;
+        }
+        else{
+            if(auxiliar==ficha_alidad){
+                j=0; cont+=1;
+            }
+            else{cont=0; j=0;}
+        }
+    }
+    if(cont>0){
+        for(int j=(copy_x-cont);j<copy_x;j++){
+            *(*(tablero+j)+copy_y)=ficha_alidad;
+        }
+    }
+    //el anterior voltea de forma horizontal hacia arriba
+    cont=0;
+    for(int j=(copy_x+1);j<=tamaño_tablero-1;j++){
+        auxiliar=*(*(tablero+j)+pos_y);
+    if(auxiliar==ficha_enemiga){
+        cont+=1;
+    }
+    else{
+        if(auxiliar==ficha_alidad){
+            j=tamaño_tablero; cont+=1;
+        }
+        else{cont=0; j=tamaño_tablero;}
+        }
+    }
+    if(cont>0){
+        for(int j=(copy_x+cont);j>copy_x;j--){
+            *(*(tablero+j)+copy_y)=ficha_alidad;
+        }
+    }
+
+     //el anterior voltea de forma horizontal hacia abajo
+    cont=0;
+    diagonal=pos_y-1;
+    for(int i=(copy_x-1);i>0;i--){
+        auxiliar=*(*(tablero+i)+diagonal);
+        if(auxiliar==ficha_enemiga){
+            cont+=1; diagonal-=1;
+        }
+        else{
+            if(auxiliar==ficha_alidad){
+            i=0; cont+=1;
+            }
+            else{cont=0; i=0;}
+            }
+    }
+        if(cont>0){
+            for(int i=(copy_x-cont);i<copy_x;i++){
+                *(*(tablero+i)+diagonal)=ficha_alidad;
+                diagonal+=1;
+            }
+    }
+    //cambia la diagonal superior izquierda
+}
+
