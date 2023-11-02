@@ -1,7 +1,9 @@
 using namespace std;
 #include <iostream>
 #include "othello.h"
-
+#include <ctime>
+#include <sstream>
+#include <iomanip>
 othello::othello(int tamaño)
 {   int mitad,mitad_h,tamaño_1;
         tamaño_tablero=tamaño+2;
@@ -72,42 +74,61 @@ void othello::imprimir_fut_pos_x(){
     cout<<"escriba la poscion en x donde quiere que quede su ficha: ";
 }
 
-void othello ::recibe_ficha_x(int posx){
-    posicion_valida=false;
-    //esto recibe la posicion del tablero y comprueba que sea valida
-    int x,tama_tab;
-    x=posx;
+
+void othello::verificar(int x){
+    //comprueba que sea valida la posicion
+    //posicion_valida=false;
+    int tama_tab;
     tama_tab=tamaño_tablero-2;
     if(0<x and x<=tama_tab){pos_x=x; posicion_valida=true;}
-    else {imprimir_error_en_posicion(); posicion_valida=false;}
+    else {imprimir_error_en_posicion();
+        posicion_valida=false;}
 }
+
+
+void othello ::recibe_ficha_x(){
+    //esto recibe la posicion del tablero
+    imprimir_fut_pos_x();
+
+    cin>> posicion;
+    verificar(posicion);
+
+}
+
+void othello::verificar_2(int y){
+    int tama_tab;
+    tama_tab=tamaño_tablero-2;
+    if(0<y and y<=tama_tab){pos_y=y; posicion_valida=true;}
+    else {imprimir_error_en_posicion();
+        posicion_valida=false;}
+
+}
+
 
 void othello::imprimir_fut_pos_y(){
     //imprime un dialogo
-    cout<<"escriba la poscion en y donde quiere que quede su ficha: ";
+    cout<<endl<<"escriba la poscion en y donde quiere que quede su ficha: ";
 }
 
-void othello ::recibe_ficha_y(int posy){
-    posicion_valida=false;
-    //esto recibe la posicion del tablero y comprueba que sea valida
-    int y,tama_tab;
-    y=posy;
-    tama_tab=tamaño_tablero-2;
-    if(0<y and y<=tama_tab){pos_y=y; posicion_valida=true;}
-    else {imprimir_error_en_posicion(); posicion_valida=false;}
+void othello ::recibe_ficha_y(){
+    imprimir_fut_pos_y();
+
+    //esto recibe la posicion del tablero
+    cin>>posicion;
+    verificar_2(posicion);
 
 }
 
 void othello::imprimir_error_en_posicion(){
     //imprime un dialogo
-    cout<<"la posicion ingresada no es valida.";
+    cout<<"la posicion ingresada no es valida. "<<endl;
 }
 
 void othello:: actualizar_tablero(char ficha){
+    cout<<"entro a actualizar tablero"<<endl;
     //esto pone la "ficha" en el tabalero, mientrans que la verificacion de la posicion sea verdaderoS
     if(verificacion==true){
-        *(*(tablero+pos_x)+pos_y)=ficha;
-    }
+        *(*(tablero+pos_x)+pos_y)=ficha;}
 }
 
 void othello :: voltear_fichas(char ficha_alidad, char ficha_enemiga){
@@ -280,3 +301,12 @@ void othello :: voltear_fichas(char ficha_alidad, char ficha_enemiga){
     //cambia los simbolos de la diagonal inferior derecha el anterior codigo
 }
 
+void othello :: tiempo(){
+    auto t = std::time(nullptr);
+    auto tm = *std::localtime(&t);
+    std::ostringstream oss;
+    oss << std::put_time(&tm, "%d-%h-%Y-%H-%M-");
+    auto str = oss.str();
+    string df=str;
+    cout<<df;
+}
