@@ -10,19 +10,21 @@ using namespace std;
 class othello
 {
 private:
-
+    //Atributos:
     char** tablero;
     int tamaño_tablero;
     int posicion;
     int pos_x,pos_y;
     bool verificacion=true;
+
+    //Metodos:
     void imprimir_error_en_posicion();
     void imprimir_fut_pos_x();
     void verificar_2(int y);
     void verificar(int x);
     void imprimir_fut_pos_y();
-    bool Validar_pos(int pos_x,int pos_y);
-    bool Posibilidad_jugada();
+    bool Validar_pos(char ficha_enemiga,char ficha_aliada);
+    bool Posibilidad_jugada(char ficha_aliada);
 
 
 public:
@@ -35,10 +37,8 @@ public:
     void recibe_ficha_y();
     void actualizar_tablero(char ficha);
     void voltear_fichas(char ficha_alidad, char ficha_enemiga);
-    bool P_Posibilidad_jugada();
-    bool P_Validar_pos(int pos_x,int pos_y);
-
-
+    bool P_Posibilidad_jugada(char ficha_aliada);
+    bool P_Validar_pos(char ficha_enemiga,char ficha_aliada);
     //bool terminarjuego(bool Val_pos,int &Cant_fB,int &Cant_fN,int tamaño);
 
 };

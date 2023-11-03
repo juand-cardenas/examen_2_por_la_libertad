@@ -4,6 +4,8 @@ using namespace std;
 #include <ctime>
 #include <sstream>
 #include <iomanip>
+#include <string>
+
 othello::othello(int tamaño)
 {   int mitad,mitad_h,tamaño_1;
         tamaño_tablero=tamaño+2;
@@ -114,7 +116,7 @@ void othello::verificar_2(int y){
 
 void othello::imprimir_fut_pos_y(){
     //imprime un dialogo
-    cout<<endl<<"escriba la poscion en y donde quiere que quede su ficha: ";
+    cout<<"escriba la poscion en y donde quiere que quede su ficha: ";
 }
 
 void othello ::recibe_ficha_y()
@@ -138,7 +140,6 @@ void othello::imprimir_error_en_posicion(){
 }
 
 void othello:: actualizar_tablero(char ficha){
-    cout<<"entro a actualizar tablero"<<endl;
     //esto pone la "ficha" en el tabalero, mientrans que la verificacion de la posicion sea verdaderoS
     if(verificacion==true){
         *(*(tablero+pos_x)+pos_y)=ficha;}
@@ -323,29 +324,110 @@ void othello :: tiempo()
     auto str = oss.str();
     string df=str;
 }
-bool othello::Validar_pos(int pos_x,int pos_y)
+
+bool othello::Posibilidad_jugada(char ficha_aliada)
 {
-    if((*(*(tablero+pos_x)+pos_y) = '*')||(*(*(tablero+pos_x)+pos_y) = '-'))
+
+    int copy_x,copy_y,cont=0,diagonal;
+    char auxiliar;
+    copy_x=pos_x;
+    copy_y=pos_y;
+
+    if((*(*(tablero+pos_x)+pos_y) ='*')||(*(*(tablero+pos_x)+pos_y) = '-'))
     {
         cout << "La posicion ingresada ya esta ocupada" << endl;
         return false;
     }
-    else {return true;}
+    else
+    {
+    for(int j=(copy_y-1);0<=j;j--)
+        {
+        auxiliar=*(*(tablero+copy_x)+j);
+        if(auxiliar==ficha_aliada)
+        {break;}
+        else
+        {return false;}
+        }
+
+    for(int j=(copy_y+1);j<=tamaño_tablero-1;j++){
+        auxiliar=*(*(tablero+copy_x)+j);
+        if(auxiliar==ficha_aliada)
+         {break;}
+        else{
+        if(auxiliar==ficha_aliada){
+            j=tamaño_tablero; cont+=1;
+        }
+        else{cont=0; j=tamaño_tablero;}
+        }
+    }
+    if(cont>0){
+        for(int j=(copy_y+cont);j>copy_y;j--){
+            *(*(tablero+copy_x)+j)=ficha_aliada;
+        }
+    }
+    return true;
+    }
 }
 
-bool othello::Posibilidad_jugada()
+bool othello::P_Posibilidad_jugada(char ficha_aliada)
 {
-    return true;//crear funcion
+    return Posibilidad_jugada(ficha_aliada);
 }
 
-bool othello::P_Posibilidad_jugada()
+bool othello::Validar_pos(char ficha_enemiga,char ficha_aliada)
 {
-    return Posibilidad_jugada();
+    if(((tablero[pos_x][pos_y])==ficha_enemiga)||((tablero[pos_x][pos_y])== ficha_aliada))
+    {
+
+    }
+
+    bool cv=true,ch=true,cdr=true,cdl=true;
+
+    if(((tablero[pos_x-1][pos_y])==ficha_enemiga)||((tablero[pos_x+1][pos_y])== ficha_enemiga))
+    {cv = false;}
+
+    if(((tablero[pos_x][pos_y+1])==ficha_enemiga)||((tablero[pos_x][pos_y-1])== ficha_enemiga))
+    {ch = false;}
+
+    if(((tablero[pos_x-1][pos_y+1])==ficha_enemiga)||((tablero[pos_x+1][pos_y-1])== ficha_enemiga))
+    {cdr = false;}
+
+    if(((tablero[pos_x+1][pos_y+1])==ficha_enemiga)||((tablero[pos_x-1][pos_y-1])== ficha_enemiga))
+    {cdl = false;}
+
+    if(!cv)
+    {
+    cout<<"Posicion valida"<< endl;
+    return false;
+    }
+
+    if(!ch)
+    {
+    cout<<"Posicion valida"<< endl;
+    return false;
+    }
+
+    if(!cdr)
+    {
+    cout<<"Posicion valida"<< endl;
+    return false;
+    }
+
+    if(!cdl)
+    {
+     cout<<"Posicion valida"<< endl;
+     return false;
+    }
+    else
+    {
+     cout<<"Posicion no valida"<< endl;
+     return true;
+    }
+
 }
 
-bool othello::P_Validar_pos(int x,int y)
-{
-    return Validar_pos(x,y);
-}
+bool othello::P_Validar_pos(char ficha_enemiga,char ficha_aliada)
+{return Validar_pos(ficha_enemiga,ficha_aliada);}
 
+//Validar jugada revisa los alrededores de la coordenada de la ficha ingresada
 
