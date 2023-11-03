@@ -13,7 +13,7 @@ private:
 
     char** tablero;
     int tamaño_tablero;
-    int posicion;
+        int posicion;
     int pos_x,pos_y;
     bool verificacion=true;
     void imprimir_error_en_posicion();
@@ -23,15 +23,24 @@ private:
     void imprimir_fut_pos_y();
 
 
+
+
 public:
+    bool Validar_pos();
+bool Posibilidad_jugada();
     void tiempo();
     bool posicion_valida;
     othello(int tamaño);
-    void imprimir_tablero();
+        void imprimir_tablero();
     void recibe_ficha_x();
     void recibe_ficha_y();
     void actualizar_tablero(char ficha);
     void voltear_fichas(char ficha_alidad, char ficha_enemiga);
+    bool P_Posibilidad_jugada();
+    //bool P_Validar_pos(int pos_x,int pos_y);
+
+
+    //bool terminarjuego(bool Val_pos,int &Cant_fB,int &Cant_fN,int tamaño);
 
 };
 

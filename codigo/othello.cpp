@@ -75,7 +75,8 @@ void othello::imprimir_fut_pos_x(){
 }
 
 
-void othello::verificar(int x){
+void othello::verificar(int x)
+{
     //comprueba que sea valida la posicion
     //posicion_valida=false;
     int tama_tab;
@@ -88,10 +89,9 @@ void othello::verificar(int x){
 
 void othello ::recibe_ficha_x(){
     //esto recibe la posicion del tablero
-    imprimir_fut_pos_x();
-
-    cin>> posicion;
-    verificar(posicion);
+        imprimir_fut_pos_x();
+        cin>> posicion;
+        verificar(posicion);
 
 }
 
@@ -110,11 +110,11 @@ void othello::imprimir_fut_pos_y(){
     cout<<endl<<"escriba la poscion en y donde quiere que quede su ficha: ";
 }
 
-void othello ::recibe_ficha_y(){
-    imprimir_fut_pos_y();
+void othello ::recibe_ficha_y()
+{
 
-    //esto recibe la posicion del tablero
-    cin>>posicion;
+    imprimir_fut_pos_y();
+    cin>> posicion;
     verificar_2(posicion);
 
 }
@@ -301,12 +301,39 @@ void othello :: voltear_fichas(char ficha_alidad, char ficha_enemiga){
     //cambia los simbolos de la diagonal inferior derecha el anterior codigo
 }
 
-void othello :: tiempo(){
+void othello :: tiempo()
+{
     auto t = std::time(nullptr);
     auto tm = *std::localtime(&t);
     std::ostringstream oss;
     oss << std::put_time(&tm, "%d-%h-%Y-%H-%M-");
     auto str = oss.str();
     string df=str;
-    cout<<df;
 }
+bool othello::Validar_pos()
+{
+    if((*(*(tablero+pos_x)+pos_y) == '*')||(*(*(tablero+pos_x)+pos_y) == '-'))
+    {
+        cout << "La posicion ingresada ya esta ocupada" << endl;
+        return false;
+    }
+    else {cout<<endl<<pos_x<<"  "<<pos_y<<endl;
+        return true;}
+}
+
+bool othello::Posibilidad_jugada()
+{
+    return true;//crear funcion
+}
+
+bool othello::P_Posibilidad_jugada()
+{
+    return Posibilidad_jugada();
+}
+
+/*bool othello::P_Validar_pos(int x,int y)
+{
+    return Validar_pos(x,y);
+}*/
+
+

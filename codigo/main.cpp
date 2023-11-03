@@ -7,26 +7,71 @@ using namespace std;
 
 int main()
 {   //int pos_x,pos_y;
-    othello hola(8);
+    othello tablero(8);
 
-    /*for(int i=0;i<64;i++){
-        if(i%2==0){
-            cout<<endl<<"turno *"<<endl;
-            hola.imprimir_tablero();
-            hola.recibe_ficha_x();
-            hola.recibe_ficha_y();
-            hola.actualizar_tablero('*');
-            hola.voltear_fichas('*','-');
+
+    cout<<tablero.Posibilidad_jugada(char '*');
+    if(tablero.Posibilidad_jugada(char '*')){
+        tablero.imprimir_tablero();
+        tablero.posicion_valida=false;
+        while(!tablero.Validar_pos()){
+            while (!tablero.posicion_valida) {
+                tablero.recibe_ficha_x();
+            }
+            tablero.posicion_valida=false;
+            while (!tablero.posicion_valida) {
+                tablero.recibe_ficha_y();
+            }
+
+            if(tablero.Validar_pos()){
+                tablero.actualizar_tablero('*');
+                tablero.voltear_fichas('*','-');
+            }
+            tablero.imprimir_tablero();
         }
-        else{
-            cout<<endl<<"turno -"<<endl;
-            hola.imprimir_tablero();
-            hola.recibe_ficha_x();
-            hola.recibe_ficha_y();
-            hola.actualizar_tablero('-');
-            hola.voltear_fichas('-','*');}
+    }
+
+    tablero.Posibilidad_jugada(char '-');
+    if(tablero.Posibilidad_jugada(char '-')){
+        tablero.imprimir_tablero();
+        tablero.posicion_valida=false;
+        while (!tablero.posicion_valida) {
+            tablero.recibe_ficha_x();
+        }
+        tablero.posicion_valida=false;
+        while (!tablero.posicion_valida) {
+            tablero.recibe_ficha_y();
+        }
+
+        if(tablero.Validar_pos()){
+            tablero.actualizar_tablero('*');
+            tablero.voltear_fichas('*','-');
+
+        }
+        tablero.imprimir_tablero();
+
+    }
+
+    if(!tablero.Posibilidad_jugada(char '*') and !tablero.Posibilidad_jugada(char '-')){
+
+    }
+
+
+
+
+
+
+
+
+
+    /*tablero.posicion_valida=false;
+    while (!tablero.posicion_valida) {
+        tablero.recibe_ficha_x();
+    }
+    tablero.posicion_valida=false;
+    while (!tablero.posicion_valida) {
+        tablero.recibe_ficha_y();
     }*/
-    hola.tiempo();
 
     return 0;
 }
