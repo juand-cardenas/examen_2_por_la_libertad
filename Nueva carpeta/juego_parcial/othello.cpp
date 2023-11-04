@@ -384,3 +384,152 @@ void othello:: guardar_texto(){
 
 }
 
+void othello :: comprobar_pisicion_ingresada(char ficha_alidad, char ficha_enemiga ){
+    int copy_x,copy_y,cont=0,diagonal;
+    char auxiliar;
+    copy_x=pos_x;
+    copy_y=pos_y;
+    for(int j=(copy_y-1);0<=j;j--){
+        auxiliar=*(*(tablero+pos_x)+j);
+        if(auxiliar==ficha_enemiga){
+            cont+=1;
+        }
+        else{
+            if(auxiliar==ficha_alidad){
+                j=0; cont+=1;
+            }
+            else{cont=0; j=0;}
+        }
+    }
+    if(cont>0){
+        poisicion_ingresada=true;
+    }
+    //lo anterior, comprueba el lado izquierdo de la ficha, de tal forma, si se puede voltear fichas para
+    //ese lado se hara, de lo contrario no se volteara las fichas
+    cont=0;
+    for(int j=(copy_y+1);j<=tamaño_tablero-1;j++){
+        auxiliar=*(*(tablero+pos_x)+j);
+    if(auxiliar==ficha_enemiga){
+        cont+=1;
+    }
+    else{
+        if(auxiliar==ficha_alidad){
+            j=tamaño_tablero; cont+=1;
+        }
+        else{cont=0; j=tamaño_tablero;}
+        }
+    }
+    if(cont>0){
+        poisicion_ingresada=true;
+    }
+    //lo anterior, comprueba el lado derecho de la ficha, de tal forma, si se puede voltear fichas para
+    //ese lado se hara, de lo contrario no se volteara las fichas
+    cont=0;
+    for(int j=(copy_x-1);0<=j;j--){
+        auxiliar=*(*(tablero+j)+pos_y);
+        if(auxiliar==ficha_enemiga){
+            cont+=1;
+        }
+        else{
+            if(auxiliar==ficha_alidad){
+                j=0; cont+=1;
+            }
+            else{cont=0; j=0;}
+        }
+    }
+    if(cont>0){
+        poisicion_ingresada=true;
+    }
+    //el anterior voltea de forma horizontal hacia arriba
+    cont=0;
+    for(int j=(copy_x+1);j<=tamaño_tablero-1;j++){
+        auxiliar=*(*(tablero+j)+pos_y);
+    if(auxiliar==ficha_enemiga){
+        cont+=1;
+    }
+    else{
+        if(auxiliar==ficha_alidad){
+            j=tamaño_tablero; cont+=1;
+        }
+        else{cont=0; j=tamaño_tablero;}
+        }
+    }
+    if(cont>0){
+        poisicion_ingresada=true;
+    }
+
+    //el anterior voltea de forma horizontal hacia abajo
+    cont=0;
+    diagonal=pos_y-1;
+    for(int i=(copy_x-1);i>0;i--){
+        auxiliar=*(*(tablero+i)+diagonal);
+        if(auxiliar==ficha_enemiga){
+            cont+=1; diagonal-=1;
+        }
+        else{
+            if(auxiliar==ficha_alidad){
+                i=0; cont+=1;
+            }
+            else{cont=0; i=0;}
+        }
+    }
+    if(cont>0){
+        poisicion_ingresada=true;
+    }
+    //cambia la diagonal superior izquierda, el condigo anterior
+
+    cont=0;
+    diagonal=pos_y-1;
+    for(int i=(copy_x+1);i>0;i++){
+        auxiliar=*(*(tablero+i)+diagonal);
+        if(auxiliar==ficha_enemiga){
+            cont+=1; diagonal-=1;
+        }
+        else{
+            if(auxiliar==ficha_alidad){
+                i=-2; cont+=1;
+            }
+            else{cont=0; i=-2;}
+        }
+    }
+    if(cont>0){
+        poisicion_ingresada=true;
+    }
+    //cambia los simbolos de la diagonal inferior izquierda-- el anterior codigo
+    cont=0;
+    diagonal=pos_y+1;
+    for(int i=(copy_x-1);0<=i;i--){
+        auxiliar=*(*(tablero+i)+diagonal);
+        if(auxiliar==ficha_enemiga){
+            cont+=1; diagonal+=1;
+        }
+        else{
+            if(auxiliar==ficha_alidad){
+                i=-2; cont+=1;
+            }
+            else{cont=0; i=-2;}
+        }
+    }
+    if(cont>0){
+        poisicion_ingresada=true;
+    }
+    //cambia los simbolos de la diagonal superiror derecha el anterior codigo
+    cont=0;
+    diagonal=pos_y+1;
+    for(int i=(copy_x+1);0<i;i++){
+        auxiliar=*(*(tablero+i)+diagonal);
+        if(auxiliar==ficha_enemiga){
+            cont+=1; diagonal+=1;
+        }
+        else{
+            if(auxiliar==ficha_alidad){
+                i=-2; cont+=1;
+            }
+            else{cont=0; i=-2;}
+        }
+    }
+    if(cont>0){
+        poisicion_ingresada=true;
+    }
+    //cambia los simbolos de la diagonal inferior derecha el anterior codigo
+}

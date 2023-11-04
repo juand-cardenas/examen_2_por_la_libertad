@@ -23,7 +23,7 @@ private:
     string texto;
     ifstream abrir;
     ofstream fout;
-
+    bool poisicion_ingresada;
     bool verificacion=true;
     void imprimir_error_en_posicion();
     void imprimir_fut_pos_x();
@@ -45,6 +45,7 @@ bool Posibilidad_jugada();
     void actualizar_tablero(char ficha);
     void voltear_fichas(char ficha_alidad, char ficha_enemiga);
     bool P_Posibilidad_jugada();
+    void comprobar_pisicion_ingresada();
     //bool P_Validar_pos(int pos_x,int pos_y);
 
 
