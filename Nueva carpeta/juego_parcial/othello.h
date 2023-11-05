@@ -15,6 +15,7 @@ class othello
 {
 private:
 
+
     char** tablero;
     int tamaño_tablero;
         int posicion;
@@ -23,6 +24,10 @@ private:
     string texto;
     ifstream abrir;
     ofstream fout;
+    int cantidad_b;
+    int cantidad_n;
+    string nombre_negra;
+    string nombre_blanca;
     bool poisicion_ingresada;
     bool verificacion=true;
     void imprimir_error_en_posicion();
@@ -31,21 +36,31 @@ private:
     void verificar(int x);
     void imprimir_fut_pos_y();
     void abrir_txt();
-    void guardar_texto();
+    void guardar_texto(string nuevo);
+    void ingresar_nombre_N();
+    void ingresar_nombre_B();
+    void contar_fichas();
+
+
 public:
+
+    othello(int tamaño);
+    void comprobar_pisicion_ingresada(char ficha_alidad, char ficha_enemiga );
+    void recibir_nombres();
     void monstrar_el_registro();
     bool Validar_pos();
-bool Posibilidad_jugada();
+    bool Posibilidad_jugada();
     void tiempo();
+    void decidir_el_ganador();
     bool posicion_valida;
-    othello(int tamaño);
-        void imprimir_tablero();
+
+    void imprimir_tablero();
     void recibe_ficha_x();
     void recibe_ficha_y();
     void actualizar_tablero(char ficha);
     void voltear_fichas(char ficha_alidad, char ficha_enemiga);
     bool P_Posibilidad_jugada();
-    void comprobar_pisicion_ingresada();
+
     //bool P_Validar_pos(int pos_x,int pos_y);
 
 

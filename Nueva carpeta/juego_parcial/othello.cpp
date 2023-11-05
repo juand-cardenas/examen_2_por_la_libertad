@@ -313,7 +313,7 @@ void othello :: tiempo()
     oss << std::put_time(&tm, "%d-%h-%Y-%H-%M#");
     auto str = oss.str();
     tiemp_o=str;
-    cout<<tiemp_o;
+    //cout<<tiemp_o;
 }
 
 bool othello::Validar_pos()
@@ -356,7 +356,7 @@ void othello::abrir_txt(){
                 }
             }
         }
-
+        abrir.close();
     }
 }
 
@@ -379,9 +379,24 @@ void othello :: monstrar_el_registro(){
 }
 
 
-void othello:: guardar_texto(){
-
-
+void othello:: guardar_texto(string nuevo){
+abrir_txt();
+    fout.open("registro.txt",ios ::in);
+    texto=texto+nuevo;
+    int tama;
+    string aux;
+    tama=texto.size();
+    for(int i=0;i<tama;i++){
+        aux=texto[i];
+        if(aux=="#"){
+            fout<<aux;
+            fout<<'\n';
+        }
+        else{
+            fout<<aux;
+        }
+    }
+//cout<<endl<<texto<<endl;
 }
 
 void othello :: comprobar_pisicion_ingresada(char ficha_alidad, char ficha_enemiga ){
@@ -532,4 +547,61 @@ void othello :: comprobar_pisicion_ingresada(char ficha_alidad, char ficha_enemi
         poisicion_ingresada=true;
     }
     //cambia los simbolos de la diagonal inferior derecha el anterior codigo
+}
+
+
+void othello:: ingresar_nombre_B(){
+    cout<<"el jugador de la ficha Blanca "<< "* "<<" ingresa su nombre: ";
+}
+
+void othello:: ingresar_nombre_N(){
+    cout<<"el jugador de la ficha Negra "<< "- "<<" ingresa su nombre: ";
+}
+
+void othello:: recibir_nombres(){
+    ingresar_nombre_B();
+    cin>>nombre_blanca;
+    ingresar_nombre_N();
+    cin>>nombre_negra;
+}
+
+void othello:: contar_fichas(){
+
+    cantidad_b=0;
+    cantidad_n=0;
+    char auxiliar_1;
+    for(int i=1;i<=tamaño_tablero-2;i++){
+        for(int j=1;j<=tamaño_tablero-2;j++){
+            auxiliar_1=*(*(tablero+i)+j);
+            if(auxiliar_1=='*'){
+                cantidad_b+=1;
+            }
+            if(auxiliar_1=='-'){
+                cantidad_n+=1;
+            }
+        }
+    }
+    //cout<<endl<<cantidad_b<<"  "<<cantidad_n<<endl;
+}
+
+
+void othello:: decidir_el_ganador(){
+    string auxi_2,auxi_3,auxi_4;
+    contar_fichas();
+    tiempo();
+    if(cantidad_b<cantidad_n){
+        auxi_3=to_string(cantidad_n);
+        auxi_4=to_string(cantidad_b);
+        auxi_2=nombre_negra +" gano con "+ auxi_3+ " fichas"+", "+nombre_blanca +" perdio "+"con "+auxi_4+" fichas "+ tiemp_o;
+    }
+    if(cantidad_b>cantidad_n){
+        auxi_3=to_string(cantidad_b);
+        auxi_4=to_string(cantidad_n);
+        auxi_2=nombre_blanca +" gano con "+ auxi_3+" fichas"+ ", "+nombre_negra +" perdio "+"con "+auxi_4+" fichas "+ tiemp_o;
+    }
+    if(cantidad_b==cantidad_n){
+        auxi_2="empate "+ tiemp_o;
+    }
+    //cout<<endl<<auxi_2<<endl;
+    guardar_texto(auxi_2);
 }
