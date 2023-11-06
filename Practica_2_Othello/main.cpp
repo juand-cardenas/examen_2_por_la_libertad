@@ -11,13 +11,13 @@ int main()
     othello game(8);
 
     //Funciones ingresar nombres de los jugadores
-    game.imprimir_tablero();
 
     while (c)
     {
-        //bool turnw = game.P_Posibilidad_jugada('*');
+        //bool turnw = game.P_Posibilidad_jugada('-','*');
         if(turnw)
         {
+         game.imprimir_tablero();
           while(u)
           {
            cout<<"turno blanco"<<endl;
@@ -30,7 +30,7 @@ int main()
           game.imprimir_tablero();
         }
 
-        //bool turnb = game.P_Posibilidad_jugada('-');
+        //bool turnb = game.P_Posibilidad_jugada('*','-');
         if(turnb)
         {
           while(v)
@@ -42,13 +42,12 @@ int main()
           }
           game.actualizar_tablero('-');
           game.voltear_fichas('-', '*');
-          game.imprimir_tablero();
         }
-
+/*
         if((!turnw)&&(!turnb))
         {
           //funcion terminar juego y dar la opcion de ver el historico de las partidas
-        }
+        }*/
     }
 
 

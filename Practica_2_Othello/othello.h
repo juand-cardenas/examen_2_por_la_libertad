@@ -5,7 +5,10 @@ using namespace std;
 #define OTHELLO_H
 #include "othello.h"
 #include <ctime>
+#include<string.h>
 #include <sstream>
+#include <bitset>
+#include <fstream>
 
 class othello
 {
@@ -15,6 +18,16 @@ private:
     int tamaño_tablero;
     int posicion;
     int pos_x,pos_y;
+    string tiemp_o;
+    string texto;
+    ifstream abrir;
+    ofstream fout;
+    int cantidad_b;
+    int cantidad_n;
+    string nombre_negra;
+    string nombre_blanca;
+    bool posicion_ingresada = true;
+    bool posicion_valida = true;
     bool verificacion=true;
 
     //Metodos:
@@ -23,21 +36,29 @@ private:
     void verificar_2(int y);
     void verificar(int x);
     void imprimir_fut_pos_y();
+    void abrir_txt();
+    void guardar_texto(string nuevo);
+    void ingresar_nombre_N();
+    void ingresar_nombre_B();
+    void contar_fichas();
     bool Validar_pos(char ficha_enemiga,char ficha_aliada);
-    bool Posibilidad_jugada(char ficha_aliada);
+    bool Posibilidad_jugada(char ficha_enemiga, char ficha_aliada);
+
 
 
 public:
 
+    void recibir_nombres();
+    void monstrar_el_registro();
+    //void comprobar_posicion_ingresada(char ficha_alidad, char ficha_enemiga);
     void tiempo();
-    bool posicion_valida;
     othello(int tamaño);
     void imprimir_tablero();
     void recibe_ficha_x();
     void recibe_ficha_y();
     void actualizar_tablero(char ficha);
     void voltear_fichas(char ficha_alidad, char ficha_enemiga);
-    bool P_Posibilidad_jugada(char ficha_aliada);
+    bool P_Posibilidad_jugada(char ficha_enemiga, char ficha_aliada);
     bool P_Validar_pos(char ficha_enemiga,char ficha_aliada);
     //bool terminarjuego(bool Val_pos,int &Cant_fB,int &Cant_fN,int tamaño);
 

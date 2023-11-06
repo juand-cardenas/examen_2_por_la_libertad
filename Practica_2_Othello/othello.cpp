@@ -325,63 +325,200 @@ void othello :: tiempo()
     string df=str;
 }
 
-bool othello::Posibilidad_jugada(char ficha_aliada)
+bool othello::Posibilidad_jugada(char ficha_enemiga, char ficha_aliada)
 {
-
-    int copy_x,copy_y,cont=0,diagonal;
-    char auxiliar;
-    copy_x=pos_x;
-    copy_y=pos_y;
-
-    if((*(*(tablero+pos_x)+pos_y) ='*')||(*(*(tablero+pos_x)+pos_y) = '-'))
+    for(int i = 0; i<tamaño_tablero;i++)
     {
-        cout << "La posicion ingresada ya esta ocupada" << endl;
-        return false;
-    }
-    else
-    {
-    for(int j=(copy_y-1);0<=j;j--)
-        {
-        auxiliar=*(*(tablero+copy_x)+j);
-        if(auxiliar==ficha_aliada)
-        {break;}
-        else
-        {return false;}
-        }
+     for(int c = 0; c<tamaño_tablero;c++)
+     {
+            pos_x = i;
+            pos_y = c;
+            if(!(Validar_pos(ficha_enemiga,ficha_aliada)))
+            {return true;}
+            else{return false;}
 
-    for(int j=(copy_y+1);j<=tamaño_tablero-1;j++){
-        auxiliar=*(*(tablero+copy_x)+j);
-        if(auxiliar==ficha_aliada)
-         {break;}
-        else{
-        if(auxiliar==ficha_aliada){
-            j=tamaño_tablero; cont+=1;
-        }
-        else{cont=0; j=tamaño_tablero;}
-        }
-    }
-    if(cont>0){
-        for(int j=(copy_y+cont);j>copy_y;j--){
-            *(*(tablero+copy_x)+j)=ficha_aliada;
-        }
-    }
-    return true;
+
+     }
     }
 }
 
-bool othello::P_Posibilidad_jugada(char ficha_aliada)
+bool othello::P_Posibilidad_jugada(char ficha_enemiga, char ficha_aliada)
 {
-    return Posibilidad_jugada(ficha_aliada);
+    return Posibilidad_jugada(ficha_enemiga, ficha_aliada);
 }
 
 bool othello::Validar_pos(char ficha_enemiga,char ficha_aliada)
 {
+    char auxiliar;
+    bool cv=true,ch=true,cdr=true,cdl=true;
+    short int cont = 0;
+
     if(((tablero[pos_x][pos_y])==ficha_enemiga)||((tablero[pos_x][pos_y])== ficha_aliada))
     {
+        //cout<<"La posicion ya esta ocupada"<< endl;
+        return posicion_valida = true;
+    }
+    //En la parte anterior se comprueba si la casilla esta ocupada
 
+    for(int cr=(pos_y+1);cr<tamaño_tablero;cr++)
+    {
+     auxiliar=*(*(tablero+pos_x)+cr);
+    if(auxiliar==ficha_enemiga)
+     {cont+= 1;}
+    else
+    {
+
+      if(auxiliar==ficha_aliada)
+        {cr=tamaño_tablero;
+        cont+=1;}
+        else
+        {cr = tamaño_tablero;
+            cont = 0;}
+    }
     }
 
-    bool cv=true,ch=true,cdr=true,cdl=true;
+    if(cont>0)
+    {posicion_ingresada=false;}
+
+    cont=0;
+
+    for(int cl=(pos_y-1);0<=cl;cl--)
+    {
+     auxiliar=*(*(tablero+pos_x)+cl);
+    if(auxiliar==ficha_enemiga)
+    {cont+=1;}
+    else
+    {
+      if(auxiliar==ficha_aliada)
+      {cl=0;
+        cont+=1;}
+      else
+      {cont=0;
+        cl=0;}
+    }
+    }
+
+    if(cont>0)
+    {posicion_ingresada=false;}
+
+    cont=0;
+    for(int cu=(pos_x+1);cu<tamaño_tablero;cu++)
+    {
+     auxiliar=*(*(tablero+cu)+pos_y);
+    if(auxiliar==ficha_enemiga)
+    {cont+=1;}
+    else
+    {
+      if(auxiliar==ficha_aliada)
+      {cu=tamaño_tablero;
+        cont+=1;}
+      else
+      {cont=0;
+        cu=tamaño_tablero;}
+    }
+    }
+
+    if(cont>0)
+    {posicion_ingresada=false;}
+
+    cont=0;
+    for(int cd=(pos_x-1);0<cd;cd--)
+    {
+     auxiliar=*(*(tablero+cd)+pos_y);
+    if(auxiliar==ficha_enemiga)
+    {cont+=1;}
+    else
+    {
+      if(auxiliar==ficha_aliada)
+      {cd=0;
+        cont+=1;}
+      else
+      {cont=0;
+        cd=0;}
+    }
+    }
+
+    if(cont>0)
+    {posicion_ingresada=false;}
+
+    cont=0;
+    for(int dur_x=(pos_x-1),dur_y=(pos_y+1);(0<dur_x)&&(dur_y<tamaño_tablero);dur_x--,dur_y++)
+    {
+    auxiliar=*(*(tablero+dur_x)+dur_y);
+    if(auxiliar==ficha_enemiga)
+    {cont+=1;}
+    else
+    {
+      if(auxiliar==ficha_aliada)
+      {dur_x=0;
+        cont+=1;}
+      else
+      {cont=0;
+        dur_x=0;}
+    }
+    }
+
+    if(cont>0)
+    {posicion_ingresada=false;}
+
+    for(int ddr_x=(pos_x+1),ddr_y=(pos_y+1);(ddr_x<tamaño_tablero)&&(ddr_y<tamaño_tablero);ddr_x++,ddr_y++)
+    {
+    auxiliar=*(*(tablero+ddr_x)+ddr_y);
+    if(auxiliar==ficha_enemiga)
+    {cont+=1;}
+    else
+    {
+      if(auxiliar==ficha_aliada)
+      {ddr_x=tamaño_tablero;
+        cont+=1;}
+      else
+      {cont=0;
+        ddr_x=tamaño_tablero;}
+    }
+    }
+
+    if(cont>0)
+    {posicion_ingresada=false;}
+
+    for(int dul_x=(pos_x-1),dul_y=(pos_y-1);(0<dul_x)&&(0<dul_y);dul_x--,dul_y--)
+    {
+    auxiliar=*(*(tablero+dul_x)+dul_y);
+    if(auxiliar==ficha_enemiga)
+    {cont+=1;}
+    else
+    {
+      if(auxiliar==ficha_aliada)
+      {dul_x=0;
+        cont+=1;}
+      else
+      {cont=0;
+        dul_x=0;}
+    }
+    }
+
+    if(cont>0)
+    {posicion_ingresada=false;}
+
+    for(int ddl_x=(pos_x+1),ddl_y=(pos_y-1);(ddl_x<tamaño_tablero)&&(0<ddl_y);ddl_x++,ddl_y--)
+    {
+    auxiliar=*(*(tablero+ddl_x)+ddl_y);
+    if(auxiliar==ficha_enemiga)
+    {cont+=1;}
+    else
+    {
+      if(auxiliar==ficha_aliada)
+      {ddl_y=0;
+        cont+=1;}
+      else
+      {cont=0;
+        ddl_y=0;}
+    }
+    }
+
+    if(cont>0)
+    {posicion_ingresada=false;}
+
+   //En la parte anterior se comprueba si se puede dar el "sandwitch" de la posicion introducida"
 
     if(((tablero[pos_x-1][pos_y])==ficha_enemiga)||((tablero[pos_x+1][pos_y])== ficha_enemiga))
     {cv = false;}
@@ -396,38 +533,28 @@ bool othello::Validar_pos(char ficha_enemiga,char ficha_aliada)
     {cdl = false;}
 
     if(!cv)
-    {
-    cout<<"Posicion valida"<< endl;
-    return false;
-    }
+    {posicion_valida = false;}
 
     if(!ch)
-    {
-    cout<<"Posicion valida"<< endl;
-    return false;
-    }
+    {posicion_valida = false;}
 
     if(!cdr)
-    {
-    cout<<"Posicion valida"<< endl;
-    return false;
-    }
+    {posicion_valida = false;}
 
     if(!cdl)
-    {
-     cout<<"Posicion valida"<< endl;
-     return false;
-    }
+    {posicion_valida = false;}
     else
-    {
-     cout<<"Posicion no valida"<< endl;
-     return true;
-    }
+    {posicion_valida = true;}
+
+    //Y en esta parte se comprueba que haya fichas adversarias alrededor de la posicion ingresada
+    if(!(posicion_valida)&&!(posicion_ingresada))
+    {//cout << "Posicion no valida"<<endl;
+    return true;}
+    else
+    {return false;}
 
 }
 
+
 bool othello::P_Validar_pos(char ficha_enemiga,char ficha_aliada)
 {return Validar_pos(ficha_enemiga,ficha_aliada);}
-
-//Validar jugada revisa los alrededores de la coordenada de la ficha ingresada
-
