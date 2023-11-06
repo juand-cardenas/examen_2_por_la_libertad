@@ -26,10 +26,9 @@ private:
     ofstream fout;
     int cantidad_b;
     int cantidad_n;
-    string nombre_negra;
-    string nombre_blanca;
-    bool poisicion_ingresada;
-    bool verificacion=true;
+
+
+
     void imprimir_error_en_posicion();
     void imprimir_fut_pos_x();
     void verificar_2(int y);
@@ -44,22 +43,24 @@ private:
 
 public:
 
+    bool validar;
+    bool verificacion;
+    string nombre_negra;
+    string nombre_blanca;
     othello(int tamaño);
-    void comprobar_pisicion_ingresada(char ficha_alidad, char ficha_enemiga );
+    bool comprobar_pisicion_ingresada(char ficha_alidad, char ficha_enemiga );
     void recibir_nombres();
     void monstrar_el_registro();
-    bool Validar_pos();
-    bool Posibilidad_jugada();
     void tiempo();
     void decidir_el_ganador();
     bool posicion_valida;
-
+    bool ver_si_hay_jugada(char ficha_alidad, char ficha_enemiga);
     void imprimir_tablero();
     void recibe_ficha_x();
     void recibe_ficha_y();
     void actualizar_tablero(char ficha);
-    void voltear_fichas(char ficha_alidad, char ficha_enemiga);
-    bool P_Posibilidad_jugada();
+    bool voltear_fichas(char ficha_alidad, char ficha_enemiga);
+
 
     //bool P_Validar_pos(int pos_x,int pos_y);
 
