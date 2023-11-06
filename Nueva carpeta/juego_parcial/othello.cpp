@@ -891,3 +891,11 @@ bool othello:: ver_si_hay_jugada(char ficha_alidad, char ficha_enemiga){
     crear.open("auxilar.txt");
 
 }*/
+
+othello::~othello(){
+
+    for(int i=0;i<tamaño_tablero;i++){
+        delete[] tablero[i];
+    }
+    delete[] tablero;
+}

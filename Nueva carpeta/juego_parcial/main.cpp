@@ -71,8 +71,10 @@ int main()
             }
 
             if(!tablero.ver_si_hay_jugada('*','-') and !tablero.ver_si_hay_jugada('-','*')){
-                cont=12;
+
                 tablero.decidir_el_ganador();
+                tablero.~othello();
+                cont=12;
             }
         }
     }

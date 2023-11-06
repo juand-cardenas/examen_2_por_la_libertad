@@ -18,7 +18,7 @@ private:
 
     char** tablero;
     int tamaño_tablero;
-        int posicion;
+    int posicion;
     int pos_x,pos_y;
     string tiemp_o;
     string texto;
@@ -48,6 +48,7 @@ public:
     string nombre_negra;
     string nombre_blanca;
     othello(int tamaño);
+    ~othello();
     bool comprobar_pisicion_ingresada(char ficha_alidad, char ficha_enemiga );
     void recibir_nombres();
     void monstrar_el_registro();
