@@ -4,6 +4,7 @@ using namespace std;
 #include <ctime>
 #include <sstream>
 #include <iomanip>
+#include <cstdio>
 
 #include<string.h>
 #include <bitset>
@@ -179,7 +180,7 @@ bool othello :: voltear_fichas(char ficha_alidad, char ficha_enemiga){
         }
     }
     if(cont>0){
-        cout<<endl<<cont<<endl;
+        //cout<<endl<<cont<<endl;
         for(int j=(copy_y+cont);j>copy_y;j--){
             *(*(tablero+copy_x)+j)=ficha_alidad;
         }
@@ -253,7 +254,7 @@ bool othello :: voltear_fichas(char ficha_alidad, char ficha_enemiga){
             }
     }
     if(cont>0){
-            cout<<endl<<"erroe"<<endl;
+            //cout<<endl<<"erroe"<<endl;
         for(int i=(copy_x-cont);i<copy_x;i++){
             *(*(tablero+i)+diagonal)=ficha_alidad;
             diagonal+=1;
@@ -413,6 +414,7 @@ void othello :: monstrar_el_registro(){
             cout<<aux<<endl;
         }
     }
+
 //muestra el registro que esta almcenado en el txt
 }
 
@@ -434,6 +436,9 @@ abrir_txt();
             fout<<aux;
         }
     }
+    fout.close();
+    //cambiarnombre();
+
 //cout<<endl<<texto<<endl;
     //fuarda en el txt el nombre del ganador de la ultima partida con la fecha y hora inclida
 }
@@ -463,7 +468,7 @@ bool othello :: comprobar_pisicion_ingresada(char ficha_alidad, char ficha_enemi
     }
     if(cont>0){
 
-        validar=true;
+
         return true;
     }
     //lo anterior, comprueba el lado izquierdo de la ficha, de tal forma, si se puede voltear fichas para
@@ -485,7 +490,7 @@ bool othello :: comprobar_pisicion_ingresada(char ficha_alidad, char ficha_enemi
     }
     if(cont>0){
 
-        validar=true;
+
         return true;
 
     }
@@ -509,7 +514,7 @@ bool othello :: comprobar_pisicion_ingresada(char ficha_alidad, char ficha_enemi
     }
     if(cont>0){
 
-        validar=true;
+
         return true;
     }
     //el anterior voltea de forma horizontal hacia arriba
@@ -530,7 +535,7 @@ bool othello :: comprobar_pisicion_ingresada(char ficha_alidad, char ficha_enemi
     }
     if(cont>0){
 
-        validar=true;
+
         return true;
     }
 
@@ -553,7 +558,7 @@ bool othello :: comprobar_pisicion_ingresada(char ficha_alidad, char ficha_enemi
     }
     if(cont>0){
 
-        validar=true;
+
         return true;
 
     }
@@ -577,7 +582,7 @@ bool othello :: comprobar_pisicion_ingresada(char ficha_alidad, char ficha_enemi
     }
     if(cont>0){
 
-        validar=true;
+
         return true;
     }
     //cambia los simbolos de la diagonal inferior izquierda-- el anterior codigo
@@ -599,7 +604,7 @@ bool othello :: comprobar_pisicion_ingresada(char ficha_alidad, char ficha_enemi
     }
     if(cont>0){
 
-        validar=true;
+
         return true;
 
     }
@@ -623,13 +628,14 @@ bool othello :: comprobar_pisicion_ingresada(char ficha_alidad, char ficha_enemi
     }
     if(cont>0){
 
-        validar=true;
+
         return true;
 
     }
     }
-        return false;
+
 }
+    return false;
     //comprueba si en la posicion indicada se puede poner una fichas segun las reglas o no
 }
 
@@ -716,12 +722,15 @@ bool othello:: ver_si_hay_jugada(char ficha_alidad, char ficha_enemiga){
                         }
                         else{
                             if(auxiliar==ficha_alidad){
-                                j=0; cont+=1;
+                                if(cont>=1){
+                                     cont+=1;}
+                                j=0;
                             }
                             else{cont=0; j=0;}
                         }
                     }
                     if(cont>0){
+
                         return true;
                     }
                     //lo anterior, comprueba el lado izquierdo de la ficha, de tal forma, si se puede voltear fichas para
@@ -734,7 +743,9 @@ bool othello:: ver_si_hay_jugada(char ficha_alidad, char ficha_enemiga){
                     }
                     else{
                         if(auxiliar==ficha_alidad){
-                            j=tamaño_tablero; cont+=1;
+                                if(cont>=1){
+                                      cont+=1;}
+                                     j=tamaño_tablero;
                         }
                         else{cont=0; j=tamaño_tablero;}
                         }
@@ -752,7 +763,9 @@ bool othello:: ver_si_hay_jugada(char ficha_alidad, char ficha_enemiga){
                         }
                         else{
                             if(auxiliar==ficha_alidad){
-                                j=0; cont+=1;
+                                     if(cont>=1){
+                                       cont+=1;}
+                                     j=0;
                             }
                             else{cont=0; j=0;}
                         }
@@ -769,7 +782,9 @@ bool othello:: ver_si_hay_jugada(char ficha_alidad, char ficha_enemiga){
                     }
                     else{
                         if(auxiliar==ficha_alidad){
-                            j=tamaño_tablero; cont+=1;
+                                     if(cont>=1){
+                                        cont+=1;}
+                                       j=tamaño_tablero;
                         }
                         else{cont=0; j=tamaño_tablero;}
                         }
@@ -781,14 +796,16 @@ bool othello:: ver_si_hay_jugada(char ficha_alidad, char ficha_enemiga){
                     //el anterior voltea de forma horizontal hacia abajo
                     cont=0;
                     diagonal=z-1;
-                    for(int i=(copy_x-1);i>0;i--){
+                    for(int i=(copy_x-1);i>=0;i--){
                         auxiliar=*(*(tablero+i)+diagonal);
                         if(auxiliar==ficha_enemiga){
                             cont+=1; diagonal-=1;
                         }
                         else{
                             if(auxiliar==ficha_alidad){
-                                i=0; cont+=1;
+                                       if(cont>=1){
+                                         cont+=1;}
+                                       i=0;
                             }
                             else{cont=0; i=0;}
                         }
@@ -800,14 +817,16 @@ bool othello:: ver_si_hay_jugada(char ficha_alidad, char ficha_enemiga){
 
                     cont=0;
                     diagonal=z-1;
-                    for(int i=(copy_x+1);i>0;i++){
+                    for(int i=(copy_x+1);i>=0;i++){
                         auxiliar=*(*(tablero+i)+diagonal);
                         if(auxiliar==ficha_enemiga){
                             cont+=1; diagonal-=1;
                         }
                         else{
                             if(auxiliar==ficha_alidad){
-                                i=-2; cont+=1;
+                                       if(cont>=1){
+                                          cont+=1;}
+                                       i=-2;
                             }
                             else{cont=0; i=-2;}
                         }
@@ -825,7 +844,9 @@ bool othello:: ver_si_hay_jugada(char ficha_alidad, char ficha_enemiga){
                         }
                         else{
                             if(auxiliar==ficha_alidad){
-                                i=-2; cont+=1;
+                                       if(cont>=1){
+                                           cont+=1;}
+                                       i=-2;
                             }
                             else{cont=0; i=-2;}
                         }
@@ -843,7 +864,9 @@ bool othello:: ver_si_hay_jugada(char ficha_alidad, char ficha_enemiga){
                         }
                         else{
                             if(auxiliar==ficha_alidad){
-                                i=-2; cont+=1;
+                                       if(cont>=1){
+                                            cont+=1;}
+                                       i=-2;
                             }
                             else{cont=0; i=-2;}
                         }
@@ -859,3 +882,12 @@ bool othello:: ver_si_hay_jugada(char ficha_alidad, char ficha_enemiga){
     }
     return false;
 }
+
+/*void othello::cambiarnombre(){
+    rename("registro.txt","registro2.txt");
+    rename("auxiliar.txt","registro.txt");
+    remove("registro2.txt");
+    ofstream crear;
+    crear.open("auxilar.txt");
+
+}*/

@@ -39,7 +39,7 @@ private:
     void ingresar_nombre_N();
     void ingresar_nombre_B();
     void contar_fichas();
-
+   // void cambiarnombre();
 
 public:
 
